@@ -44,7 +44,7 @@ module ActiveModel
           explicit_serializer_class._type
         # BUGFIX: use serializer `type` option when collection is empty and serializer is present
         key ||= object.empty? && object.respond_to?(:model) &&
-          (serializer_class = ActiveModel::Serializer.serializer_for(resource, namespace: options[:namespace])) &&
+          (serializer_class = ActiveModel::Serializer.serializer_for(object.model, namespace: options[:namespace])) &&
           serializer_class._type
         # 2. get from first serializer instance in collection
         key ||= (serializer = serializers.first) && serializer.json_key
