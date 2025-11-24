@@ -9,7 +9,8 @@ module ActiveModelSerializers
       end
 
       def serializable_hash(options = nil)
-        options = serialization_options(options)
+        # Rails 8 frozen hash fix
+        options = serialization_options(options).dup
         options[:fields] ||= instance_options[:fields]
         serialized_hash = serializer.serializable_hash(instance_options, options, self)
 
